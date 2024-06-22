@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cek kodam 👹👹👹👹</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="max-w-md w-full bg-white p-8 rounded shadow-lg m-auto mt-48">
+        <h2 class="text-2xl font-bold mb-8 text-center">Cek Khodam Pendamping Hidup</h2>
+        <form id="khodamForm" action="#" method="POST">
+            <div class="mb-4">
+                <input type="text" id="nama" placeholder="Masukan Nama Kamu" name="nama" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+
+            <div class="mb-4 flex justify-center">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:outline-none focus:shadow-outline">
+                    Cek
+                </button>
+            </div>
+
+            <div id="result" class="text-center"></div>
+        </form>
+    </div>
+
+    <script>
+        const khodamNames = [
+        "Martabak Cokelat",
+        "Naga Sakti",
+        "Ratu Pantai Selatan",
+        "Harimau Putih",
+        "Raja Jin",
+        "Dewi Bulan",
+        "Penjaga Hutan",
+        "Singa Emas",
+        "Banteng Sakti",
+        "Elang Perkasa",
+        "Laba-laba Sunda",
+        "Buaya Hitam",
+        "Katak Sigma",
+        "Skibidi Sigma",
+        "Ikan Lohan Tidak Gyat",
+        "Burung Puyuh Warna Bjir",
+        "Monyet Hutan",
+        "Gajah Ngawi",
+        "Kursi Mewing",
+        "Balon Ku Sigma",
+        "Di Hina Tetap Sigma",
+        "Kue Keju",
+        "Mobil Bekas Toyota Gyat",
+        "Rehan Toyota",
+        "Ikbal Hotwil",
+        "Kuda Pake Sendal",
+        "Sendal ",
+        "Jaket Bapak",
+        "Kambing Hitam",
+        "Pintu Gerbang",
+        "Kayu Jati ",
+        "Jati Diri",
+        "Ayam Tidak Punya KTP",
+        "Dino Sok Inggris",
+        "Bibir Jontor Badag",
+        "Teh Sari Wangi",
+        "Indomi Kecap Asin",
+        "Burung Elang Dari Jawa",
+        "Tidak Ada/Kosong !",
+        "Nokia Bapak",
+        "Telur Gulung",
+        "Sayur Asem Kecap Manis",
+        "Baju Terbang",
+        "Sendal Jepit",
+        "Nasi Padang",
+        "Pizza Mewah",
+        "Jus Alpukat",
+        "Sate Ayam",
+        "Gado-Gado",
+        "Kambing Guling",
+        "Tahu Bulat",
+        "Lontong Balap",
+        "Soto Ayam",
+        "Bakso Gepeng",
+        "Cilok Kenyal",
+        "Mie Ayam Lezat",
+        "Es Cendol Manis",
+        "Kopi Hitam Mantap",
+        "Brownies Lumer",
+        "Kerak Telor",
+        "Tempe Mendoan",
+        "Jajanan Pasar",
+        "Pecel Lele",
+        "Ayam Geprek",
+        "Roti Bakar",
+        "Pisang Goreng",
+        "Bubur Ayam",
+        "Nasi Goreng Spesial",
+        "Sop Buntut",
+        "Gule Kambing",
+        "Rawon Hitam",
+        "Ikan Bakar",
+        "Sate Kambing",
+        "Kue Cubit",
+        "Cakwe",
+        "Tahu Gejrot",
+        "Kacang Polong",
+        "Sayur Bayam",
+        "Sambal Terasi",
+        "Es Dawet",
+        "Teh Tarik",
+        "Es Teler",
+        "Kerupuk Kulit",
+        "Rengginang",
+        "Emping Melinjo",
+        "Mie Goreng",
+        "Risoles",
+        "Lumpia Semarang",
+        "Pempek Palembang",
+        "Asinan Betawi",
+        "Lemper Ayam",
+        "Bika Ambon",
+        "Klepon",
+        "Kue Lumpur",
+        "Putu Ayu",
+        "Onde-Onde",
+        "Pukis",
+        "Serabi",
+        "Martabak Telur",
+        "Sempol Ayam",
+        "Bubur Ketan Hitam",
+        "Kai Cenat",
+        "Ibu Kai Cenat",
+        "Bapak Kai Cenat",
+        "Adek Kai Cenat",
+        "Kakak Kai Cenat",
+        "Nenek Kai Cenat",
+        "Kakek Kai Cenat",
+        "Bibi Kai Cenat",
+        "Paman Kai Cenat",
+        "Istri Kai Cenat",
+        "Keponakan Kai Cenat",
+        "Bapak Nya Istri Kai Cenat",
+        "Istri nya Bapak nya Istri Kai Cenat",
+        "Es Dawet Ketan Hitam Pekat Oli Bekas",
+        "Kai Cenat Mode Sigma",
+        "Bocil Mewing",
+        "[Rare,Misterius,Cool,Sigma,Mewing,Made in ohio] Akbar Motor Mio Gas Elpiji Wibu Sejati Kasur Bekas Motor Supra Blukutuk-Blukutuk",
+        "Kapten Bajak Laut Ngawi",
+        "Mio Mirza",
+        "Kak Gem Mode Mewing",
+        "Kak Gem",
+        "Uni Bakwan",
+        "Sambal Goreng Kecap Hitam",
+        "Kamu Bukan User Khodam !",
+        "Kosong",
+        "Ambatron Type 555 - y 9 UZ",
+        "Ambatukam Mewing",
+        "Mas Rusdi Tidak G4Y",
+        "Suki Liar",
+        "Suki Type G4",
+        "The World",
+        "Star Platinum",
+        "Gajah Kayang",
+        ];
+
+        function cekKhodam() {
+            const randomIndex = Math.floor(Math.random() * khodamNames.length);
+            const randomKhodam = khodamNames[randomIndex];
+
+            const nama = document.getElementById('nama').value.trim();
+
+            if (nama === '') {
+                alert('Nama tidak boleh kosong!');
+                return;
+            }
+
+            console.log(`Khodam yang muncul: ${randomKhodam}`);
+
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = `<p class="text-2xl text-blue-500 font-bold">${randomKhodam}</p>`;
+
+            const inputNama = document.getElementById('nama');
+            inputNama.value = '';
+        }
+
+        const form = document.getElementById('khodamForm');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); 
+            cekKhodam();
+        });
+    </script>
+</body>
+</html>
